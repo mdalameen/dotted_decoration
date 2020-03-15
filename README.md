@@ -1,6 +1,6 @@
 # dotted_decoration
 
-A new Flutter package project.
+Dotted line decoration is handly package to draw dotted divider, dotted border for rectangle, circle or rounded rectangle.
 
 ## Getting Started
 
