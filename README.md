@@ -52,5 +52,5 @@ Color of line, default shape is `Colors.grey`.
 
 ```color: Colors.red```
 
-#### color
+#### example image
 ![dotted_decoration image](assets/screen-shot.png?raw=true "Flutter Dotted Decoration screenshot" )
