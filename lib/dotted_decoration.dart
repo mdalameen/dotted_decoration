@@ -48,7 +48,6 @@ class _DottedDecotatorPainter extends BoxPainter {
         outPath.moveTo(offset.dx, offset.dy);
         outPath.lineTo(offset.dx, offset.dy + configuration.size.height);
       } else if (linePosition == LinePosition.top) {
-        print('building top');
         outPath.moveTo(offset.dx, offset.dy);
         outPath.lineTo(offset.dx + configuration.size.width, offset.dy);
       } else if (linePosition == LinePosition.right) {
@@ -81,7 +80,6 @@ class _DottedDecotatorPainter extends BoxPainter {
     Path drawPath = Path();
 
     for (PathMetric me in metrics) {
-      print(me);
       double totalLength = me.length;
       int index = -1;
 
