@@ -2,6 +2,12 @@
 
 Dotted line decoration is handly package to draw dotted divider, dotted border for rectangle, oval or circle.
 
+### screenshot image
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/mdalameen/dotted_decoration/master/assets/screen-shot.png" width="350" alt="Flutter Dotted Decoration screenshot">
+</p>
+
 
 ### Installing
 
@@ -52,5 +58,3 @@ Color of line, default shape is `Colors.grey`.
 
 ```color: Colors.red```
 
-#### example image
-![dotted_decoration image](assets/screen-shot.png?raw=true "Flutter Dotted Decoration screenshot" )
