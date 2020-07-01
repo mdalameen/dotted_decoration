@@ -1,19 +1,19 @@
 # dotted_decoration
 
-Dotted line decoration is handly package to draw dotted divider, dotted border for rectangle, oval or circle.
+Dotted line decoration is custom decoration as simple as BoxDocoration can be used in Container widget to draw dotted divider, dotted border for rectangle, oval or circle. 
 
-### screenshot image
+## Preview
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/mdalameen/dotted_decoration/master/assets/screen-shot.png" width="350" alt="Flutter Dotted Decoration screenshot">
 </p>
 
 
-### Installing
+## Installing
 
 To use this package, add `dotted_decoration` as a dependency in your `pubspec.yaml` file.
 
-### Usage
+## Usage
 
 Create a `container` widget and assign  `DottedDecoration` as decoration
 
@@ -24,8 +24,38 @@ Container(
 )
 ```
 
+```dart
+Container(
+    decoration: DottedDecoration()
+    child: Text('Dotted Decoration')
+)
+```
 
-### Parameters
+To draw line
+
+```dart
+DottedDecoration(
+  shape: Shape.line, linePosition: LinePosition.bottom),
+```
+
+To add rounded rection
+
+```dart
+DottedDecoration(
+  shape: Shape.box,
+  borderRadius: BorderRadius.circular(10), //remove this to get plane rectange
+),
+```
+
+To add circle 
+
+```dart
+//make sure width & height of container is same to get perfect circle or else it will end up in oval
+DottedDecoration(shape: Shape.circle, dash: <int>[1, 4]);
+```
+
+
+## Parameters
 
 #### Shape
 Kind of outline shape, default shape is `Shape.line`.
