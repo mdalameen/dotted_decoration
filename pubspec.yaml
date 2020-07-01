@@ -1,6 +1,6 @@
 name: dotted_decoration
 description: Dotted line decoration is handly package to draw dotted divider, dotted border for rectangle, circle or rounded rectangle.
-version: 1.2.1
+version: 1.2.2
 homepage: https://github.com/mdalameen/dotted_decoration
 
 environment:

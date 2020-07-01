@@ -15,3 +15,7 @@
 
 ## [1.2.1]
 * Added repository link as homepage
+
+## [1.2.2]
+* Added license
+* Changed description
