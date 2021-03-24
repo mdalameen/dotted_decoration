@@ -19,3 +19,6 @@
 ## [1.2.2]
 * Added license
 * Changed description
+
+## [2.0.0]
+* Migrated to null safety
