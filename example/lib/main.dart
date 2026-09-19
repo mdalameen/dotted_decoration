@@ -73,11 +73,17 @@ class _MyHomePageState extends State<MyHomePage> {
                       strokeWidth: 2),
                   DottedDecoration(
                       shape: Shape.box, color: Colors.red, strokeWidth: 2),
+                  DottedDecoration(
+                    shape: Shape.box,
+                    borderRadius: BorderRadius.circular(10),
+                    backgroundColor: const Color(0xFFE3F2FD),
+                  ),
                 ], <String>[
                   'Box',
                   'Rounded Box',
                   'Custom Rounded Box',
-                  'Colored Box'
+                  'Colored Box',
+                  'Box with background'
                 ]),
                 _getDecorationWidget('Oval', <Decoration>[
                   DottedDecoration(shape: Shape.circle),

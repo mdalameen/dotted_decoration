@@ -10,6 +10,7 @@ void main() {
     expect(find.text('Left Line'), findsOneWidget);
     expect(find.text('Rounded Box'), findsOneWidget);
     expect(find.text('Custom Rounded Box'), findsOneWidget);
+    expect(find.text('Box with background'), findsOneWidget);
     expect(find.text('Oval with dotted outline'), findsOneWidget);
   });
 }

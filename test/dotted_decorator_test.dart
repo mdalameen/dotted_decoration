@@ -12,6 +12,7 @@ void main() {
     expect(decoration.borderRadius, isNull);
     expect(decoration.dash, const <int>[5, 5]);
     expect(decoration.strokeWidth, 1);
+    expect(decoration.backgroundColor, isNull);
   });
 
   test('stores custom configuration', () {
@@ -22,6 +23,7 @@ void main() {
       borderRadius: BorderRadius.circular(8),
       dash: const <int>[2, 4],
       strokeWidth: 2,
+      backgroundColor: const Color(0xFFEEEEEE),
     );
 
     expect(decoration.shape, Shape.box);
@@ -30,6 +32,7 @@ void main() {
     expect(decoration.borderRadius, BorderRadius.circular(8));
     expect(decoration.dash, const <int>[2, 4]);
     expect(decoration.strokeWidth, 2);
+    expect(decoration.backgroundColor, const Color(0xFFEEEEEE));
   });
 
   test('createBoxPainter returns a BoxPainter', () {
@@ -83,6 +86,48 @@ void main() {
     expect(
       find.byType(DecoratedBox),
       paints
+        ..path(
+          color: const Color(0xFF9E9E9E),
+          style: PaintingStyle.stroke,
+          strokeWidth: 1,
+        ),
+    );
+  });
+
+  testWidgets('paints background color behind a dotted box', (tester) async {
+    await _pumpDecoratedBox(
+      tester,
+      DottedDecoration(
+        shape: Shape.box,
+        backgroundColor: Colors.blue,
+      ),
+    );
+
+    expect(
+      find.byType(DecoratedBox),
+      paints
+        ..path(
+          color: Colors.blue,
+          style: PaintingStyle.fill,
+        )
+        ..path(
+          color: const Color(0xFF9E9E9E),
+          style: PaintingStyle.stroke,
+          strokeWidth: 1,
+        ),
+    );
+  });
+
+  testWidgets('paints background color behind a dotted line', (tester) async {
+    await _pumpDecoratedBox(
+      tester,
+      DottedDecoration(backgroundColor: Colors.yellow),
+    );
+
+    expect(
+      find.byType(DecoratedBox),
+      paints
+        ..rect(color: Colors.yellow)
         ..path(
           color: const Color(0xFF9E9E9E),
           style: PaintingStyle.stroke,

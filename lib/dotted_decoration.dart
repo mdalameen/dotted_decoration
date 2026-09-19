@@ -1,4 +1,5 @@
 import 'dart:ui';
+
 import 'package:flutter/widgets.dart';
 
 class DottedDecoration extends Decoration {
@@ -8,18 +9,29 @@ class DottedDecoration extends Decoration {
   final BorderRadius? borderRadius;
   final List<int> dash;
   final double strokeWidth;
-  DottedDecoration(
-      {this.shape = Shape.line,
-      this.linePosition = LinePosition.bottom,
-      this.color = const Color(0xFF9E9E9E),
-      this.borderRadius,
-      this.dash = const <int>[5, 5],
-      this.strokeWidth = 1});
+  final Color? backgroundColor;
+
+  const DottedDecoration({
+    this.shape = Shape.line,
+    this.linePosition = LinePosition.bottom,
+    this.color = const Color(0xFF9E9E9E),
+    this.borderRadius,
+    this.dash = const <int>[5, 5],
+    this.strokeWidth = 1,
+    this.backgroundColor,
+  });
 
   @override
   BoxPainter createBoxPainter([VoidCallback? onChanged]) {
     return _DottedDecotatorPainter(
-        shape, linePosition, color, borderRadius, dash, strokeWidth);
+      shape,
+      linePosition,
+      color,
+      borderRadius,
+      dash,
+      strokeWidth,
+      backgroundColor,
+    );
   }
 }
 
@@ -30,8 +42,16 @@ class _DottedDecotatorPainter extends BoxPainter {
   BorderRadius? borderRadius;
   List<int> dash;
   double strokeWidth;
-  _DottedDecotatorPainter(this.shape, this.linePosition, this.color,
-      this.borderRadius, this.dash, this.strokeWidth) {
+  Color? backgroundColor;
+  _DottedDecotatorPainter(
+    this.shape,
+    this.linePosition,
+    this.color,
+    this.borderRadius,
+    this.dash,
+    this.strokeWidth,
+    this.backgroundColor,
+  ) {
     borderRadius = borderRadius ?? BorderRadius.circular(0);
   }
 
@@ -47,12 +67,16 @@ class _DottedDecotatorPainter extends BoxPainter {
         outPath.lineTo(offset.dx + configuration.size!.width, offset.dy);
       } else if (linePosition == LinePosition.right) {
         outPath.moveTo(offset.dx + configuration.size!.width, offset.dy);
-        outPath.lineTo(offset.dx + configuration.size!.width,
-            offset.dy + configuration.size!.height);
+        outPath.lineTo(
+          offset.dx + configuration.size!.width,
+          offset.dy + configuration.size!.height,
+        );
       } else {
         outPath.moveTo(offset.dx, offset.dy + configuration.size!.height);
-        outPath.lineTo(offset.dx + configuration.size!.width,
-            offset.dy + configuration.size!.height);
+        outPath.lineTo(
+          offset.dx + configuration.size!.width,
+          offset.dy + configuration.size!.height,
+        );
       }
     } else if (shape == Shape.box) {
       RRect rect = RRect.fromLTRBAndCorners(
@@ -67,8 +91,25 @@ class _DottedDecotatorPainter extends BoxPainter {
       );
       outPath.addRRect(rect);
     } else if (shape == Shape.circle) {
-      outPath.addOval(Rect.fromLTWH(offset.dx, offset.dy,
-          configuration.size!.width, configuration.size!.height));
+      outPath.addOval(
+        Rect.fromLTWH(
+          offset.dx,
+          offset.dy,
+          configuration.size!.width,
+          configuration.size!.height,
+        ),
+      );
+    }
+
+    if (backgroundColor != null) {
+      final fillPaint = Paint()
+        ..color = backgroundColor!
+        ..style = PaintingStyle.fill;
+      if (shape == Shape.line) {
+        canvas.drawRect(offset & configuration.size!, fillPaint);
+      } else {
+        canvas.drawPath(outPath, fillPaint);
+      }
     }
 
     PathMetrics metrics = outPath.computeMetrics(forceClosed: false);
@@ -84,19 +125,23 @@ class _DottedDecotatorPainter extends BoxPainter {
         bool isEven = index % 2 == 0;
         if (isEven)
           drawPath.addPath(
-              me.extractPath(start, to, startWithMoveTo: true), Offset.zero);
+            me.extractPath(start, to, startWithMoveTo: true),
+            Offset.zero,
+          );
         start = to;
       }
     }
 
     canvas.drawPath(
-        drawPath,
-        Paint()
-          ..color = color
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = strokeWidth);
+      drawPath,
+      Paint()
+        ..color = color
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = strokeWidth,
+    );
   }
 }
 
 enum LinePosition { left, top, right, bottom }
+
 enum Shape { line, box, circle }
