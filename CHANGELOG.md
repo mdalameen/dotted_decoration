@@ -22,3 +22,7 @@
 
 ## [2.0.0]
 * Migrated to null safety
+
+## [3.0.0]
+* Updated Dart SDK constraint to `^3.13.0`
+* Added optional `backgroundColor` to `DottedDecoration`
