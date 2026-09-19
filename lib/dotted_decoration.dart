@@ -9,12 +9,12 @@ class DottedDecoration extends Decoration {
   final List<int> dash;
   final double strokeWidth;
   DottedDecoration(
-      {this.shape: Shape.line,
-      this.linePosition: LinePosition.bottom,
-      this.color: const Color(0xFF9E9E9E),
+      {this.shape = Shape.line,
+      this.linePosition = LinePosition.bottom,
+      this.color = const Color(0xFF9E9E9E),
       this.borderRadius,
-      this.dash: const <int>[5, 5],
-      this.strokeWidth: 1});
+      this.dash = const <int>[5, 5],
+      this.strokeWidth = 1});
 
   @override
   BoxPainter createBoxPainter([VoidCallback? onChanged]) {
